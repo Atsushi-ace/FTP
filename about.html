@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTP - About</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="logo.png" alt="FTP Logo" class="logo"></a>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="mainNav">
+            <ul>
+                <!-- <li><a href="index.html">previews</a></li> -->
+                <li><a href="sale.html">Sale</a></li>
+                <li><a href="lookbook.html">Lookbook</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="stores.html">Stores</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    </header>
+    <main class="container">
+        <div class="about-content">
+            <p>Born in the neon heartbeat of Tokyo, FTP is more than a streetwear label—it's a rallying cry for everyone writing their own script...</p>
+            <p>We believe every person carries a story worth telling, a plot worth living...</p>
+            <p>Your path isn't measured against someone else's highlight reel; it's defined by the scenes you choose to film every day...</p>
+            <p>We ignite protagonists, not passengers...</p>
+            <p>FTP fuels the visionaries who sketch tomorrow in bold strokes, who treat the streets as storyboards and every sunrise as a fresh slate...</p>
+            <p>Slip into our world and feel that pulse—the permission to dream louder, stray further, and script life on your own impossible terms...</p>
+            <p>So don't chase comparisons...</p>
+            <p>Chase moments...</p>
+            <p>Pull on an FTP tee, step into the frame, and own your storyline—scene by scene, plot twist by plot twist... This is your movie...</p>
+            <p>Dress like it...</p>
+        </div>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="terms.html">terms</a></li>
+            </ul>
+        </nav>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+    // Animation for random letter reveal
+    document.addEventListener('DOMContentLoaded', function() {
+        const aboutContent = document.querySelector('.about-content');
+        const paragraphs = aboutContent.querySelectorAll('p');
+        let letterSpans = [];
+
+        // Wrap each letter in a span
+        paragraphs.forEach(p => {
+            let html = '';
+            for (let char of p.textContent) {
+                if (char === ' ') {
+                    html += ' ';
+                } else {
+                    html += `<span class="hidden-letter" style="opacity:0;">${char}</span>`;
+                }
+            }
+            p.innerHTML = html;
+            letterSpans.push(...p.querySelectorAll('.hidden-letter'));
+        });
+
+        // Shuffle the array of spans
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+        shuffle(letterSpans);
+
+        // Reveal a few letters at a time
+        let revealed = 0;
+        const batch = 5;
+        function revealBatch() {
+            for (let i = 0; i < batch && revealed < letterSpans.length; i++, revealed++) {
+                letterSpans[revealed].style.opacity = 1;
+            }
+            if (revealed < letterSpans.length) {
+                setTimeout(revealBatch, 30);
+            } else {
+                // After all letters are revealed, start the blinking animation
+                setTimeout(startBlinking, 400);
+            }
+        }
+        revealBatch();
+
+        // Blinking animation
+        function startBlinking() {
+            const blinkInterval = 60; // ms between blinks
+            const blinkBatch = Math.max(1, Math.floor(letterSpans.length * 0.08)); // how many letters blink at once
+            setInterval(() => {
+                // Randomly pick some letters to blink
+                let indices = Array.from({length: letterSpans.length}, (_, i) => i);
+                shuffle(indices);
+                let toBlink = indices.slice(0, blinkBatch);
+                // Hide them
+                toBlink.forEach(idx => letterSpans[idx].style.opacity = 0);
+                // Restore after a short delay
+                setTimeout(() => {
+                    toBlink.forEach(idx => letterSpans[idx].style.opacity = 1);
+                }, blinkInterval * 0.8);
+            }, blinkInterval);
+        }
+    });
+
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mainNav = document.getElementById('mainNav');
+      const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+      function openMobileMenu() {
+        mobileMenuToggle.classList.add('active', 'hide');
+        mainNav.classList.add('active');
+        mobileMenuOverlay.classList.add('active');
+        document.body.classList.add('menu-open');
+      }
+
+      function closeMobileMenu() {
+        mobileMenuToggle.classList.remove('active', 'hide');
+        mainNav.classList.remove('active');
+        mobileMenuOverlay.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
+
+      mobileMenuToggle.addEventListener('click', function() {
+        if (mainNav.classList.contains('active')) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+      });
+
+      mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+      // Close menu when clicking on a nav link
+      const navLinks = mainNav.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+      });
+
+      // Close menu on window resize if screen becomes larger
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          closeMobileMenu();
+        }
+      });
+    });
+    </script>
+</body>
+</html> 

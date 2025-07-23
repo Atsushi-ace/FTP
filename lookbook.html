@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTP - Lookbook</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .lookbook-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
+            min-height: calc(100vh - 200px); /* Account for header and footer */
+        }
+        
+        .slider-section {
+            width: 100vw;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .row {
+            position: relative;
+            width: 100vw;
+            height: 240px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        
+        .slider {
+            display: flex;
+            height: 240px;
+            will-change: transform;
+            gap: 0;
+            transition: none;
+            width: max-content;
+        }
+        
+        .slider img {
+            height: 240px;
+            object-fit: cover;
+            min-width: 300px;
+            user-select: none;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="logo.png" alt="FTP Logo" class="logo"></a>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="mainNav">
+            <ul>
+                <li><a href="sale.html">Sale</a></li>
+                <li><a href="lookbook.html">Lookbook</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="stores.html">Stores</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    </header>
+
+    <main class="lookbook-container">
+        <div class="slider-section">
+            <div class="row" id="topRow">
+                <div class="slider" id="sliderTop">
+                    <!-- imágenes insertadas vía JS -->
+                </div>
+            </div>
+            <div class="row" id="bottomRow">
+                <div class="slider" id="sliderBottom">
+                    <!-- imágenes insertadas vía JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="terms.html">terms</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+<script>
+  
+  const imagesTop = [
+    'separated_lookbook_images/Image_1_LOOKBOOK.png',
+    'separated_lookbook_images/Image_2_LOOKBOOK.png',
+    'separated_lookbook_images/Image_3_LOOKBOOK.png',
+    'separated_lookbook_images/Image_4_LOOKBOOK.png',
+    'separated_lookbook_images/Image_5_LOOKBOOK.png',
+    'separated_lookbook_images/Image_6_LOOKBOOK.png',
+    'separated_lookbook_images/Image_7_LOOKBOOK.png',
+    'separated_lookbook_images/Image_8_LOOKBOOK.png',
+    'separated_lookbook_images/Image_9_LOOKBOOK.png',
+    'separated_lookbook_images/Image_10_LOOKBOOK.png',
+    'separated_lookbook_images/Image_11_LOOKBOOK.png',
+    'separated_lookbook_images/Image_12_LOOKBOOK.png',
+    'separated_lookbook_images/Image_13_LOOKBOOK.png',
+    'separated_lookbook_images/Image_14_LOOKBOOK.png',
+    'separated_lookbook_images/Image_15_LOOKBOOK.png',
+    'separated_lookbook_images/Image_16_LOOKBOOK.png',
+    'separated_lookbook_images/Image_17_LOOKBOOK.png',
+    'separated_lookbook_images/Image_18_LOOKBOOK.png',
+    'separated_lookbook_images/Image_19_LOOKBOOK.png',
+    'separated_lookbook_images/Image_20_LOOKBOOK.png'
+  ];
+
+ 
+  const imagesBottom = [
+    'separated_lookbook_images/Image_11_LOOKBOOK.png',
+    'separated_lookbook_images/Image_12_LOOKBOOK.png',
+    'separated_lookbook_images/Image_13_LOOKBOOK.png',
+    'separated_lookbook_images/Image_14_LOOKBOOK.png',
+    'separated_lookbook_images/Image_15_LOOKBOOK.png',
+    'separated_lookbook_images/Image_16_LOOKBOOK.png',
+    'separated_lookbook_images/Image_17_LOOKBOOK.png',
+    'separated_lookbook_images/Image_18_LOOKBOOK.png',
+    'separated_lookbook_images/Image_19_LOOKBOOK.png',
+    'separated_lookbook_images/Image_20_LOOKBOOK.png',
+    'separated_lookbook_images/Image_1_LOOKBOOK.png',
+    'separated_lookbook_images/Image_2_LOOKBOOK.png',
+    'separated_lookbook_images/Image_3_LOOKBOOK.png',
+    'separated_lookbook_images/Image_4_LOOKBOOK.png',
+    'separated_lookbook_images/Image_5_LOOKBOOK.png',
+    'separated_lookbook_images/Image_6_LOOKBOOK.png',
+    'separated_lookbook_images/Image_7_LOOKBOOK.png',
+    'separated_lookbook_images/Image_8_LOOKBOOK.png',
+    'separated_lookbook_images/Image_9_LOOKBOOK.png',
+    'separated_lookbook_images/Image_10_LOOKBOOK.png'
+  ];
+
+  const sliderTop = document.getElementById('sliderTop');
+  const sliderBottom = document.getElementById('sliderBottom');
+
+  function addImages(slider, images) {
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = "Lookbook Image";
+      slider.appendChild(img);
+    });
+
+    images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = "Lookbook Image";
+      slider.appendChild(img);
+    });
+  }
+
+  addImages(sliderTop, imagesTop);
+  addImages(sliderBottom, imagesBottom);
+
+
+  function waitForImages(slider) {
+    const imgs = slider.querySelectorAll('img');
+    return Promise.all(Array.from(imgs).map(img => {
+      if (img.complete) return Promise.resolve();
+      return new Promise(resolve => img.onload = resolve);
+    }));
+  }
+
+  Promise.all([waitForImages(sliderTop), waitForImages(sliderBottom)]).then(() => {
+    let posTop = 0;
+    let posBottom = 0;
+    const speed = 1.5;
+
+    
+    const totalWidthTop = Array.from(sliderTop.children).reduce((acc, img) => acc + img.offsetWidth, 0);
+    const totalWidthBottom = Array.from(sliderBottom.children).reduce((acc, img) => acc + img.offsetWidth, 0);
+
+
+    sliderTop.style.width = totalWidthTop + 'px';
+    sliderBottom.style.width = totalWidthBottom + 'px';
+
+
+    posBottom = -totalWidthBottom / 2;
+
+    function animate() {
+   
+      posTop -= speed;
+      if (posTop <= -totalWidthTop / 2) posTop = 0;
+
+     
+      posBottom += speed;
+      if (posBottom >= 0) posBottom = -totalWidthBottom / 2;
+
+      sliderTop.style.transform = `translateX(${posTop}px)`;
+      sliderBottom.style.transform = `translateX(${posBottom}px)`;
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  });
+
+  // Mobile menu functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const mainNav = document.getElementById('mainNav');
+    const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+    function openMobileMenu() {
+      mobileMenuToggle.classList.add('active', 'hide');
+      mainNav.classList.add('active');
+      mobileMenuOverlay.classList.add('active');
+      document.body.classList.add('menu-open');
+    }
+
+    function closeMobileMenu() {
+      mobileMenuToggle.classList.remove('active', 'hide');
+      mainNav.classList.remove('active');
+      mobileMenuOverlay.classList.remove('active');
+      document.body.classList.remove('menu-open');
+    }
+
+    mobileMenuToggle.addEventListener('click', function() {
+      if (mainNav.classList.contains('active')) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    });
+
+    mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+    // Close menu when clicking on a nav link
+    const navLinks = mainNav.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // Close menu on window resize if screen becomes larger
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        closeMobileMenu();
+      }
+    });
+
+    // Touch support for sliders on mobile
+    let isTouching = false;
+    let startX = 0;
+    let currentX = 0;
+
+    function handleTouchStart(e) {
+      isTouching = true;
+      startX = e.touches[0].clientX;
+      currentX = startX;
+    }
+
+    function handleTouchMove(e) {
+      if (!isTouching) return;
+      currentX = e.touches[0].clientX;
+      e.preventDefault();
+    }
+
+    function handleTouchEnd() {
+      if (!isTouching) return;
+      isTouching = false;
+      
+      const diffX = startX - currentX;
+      const threshold = 50; // Minimum swipe distance
+      
+      if (Math.abs(diffX) > threshold) {
+        // Swipe detected - could be used for navigation or other interactions
+        console.log('Swipe detected:', diffX > 0 ? 'left' : 'right');
+      }
+    }
+
+    // Add touch event listeners to sliders
+    const sliders = [sliderTop, sliderBottom];
+    sliders.forEach(slider => {
+      slider.addEventListener('touchstart', handleTouchStart, { passive: false });
+      slider.addEventListener('touchmove', handleTouchMove, { passive: false });
+      slider.addEventListener('touchend', handleTouchEnd, { passive: false });
+    });
+  });
+
+</script>
+
+</body>
+</html>

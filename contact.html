@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FTP — For The Plot | Contact</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --black: #000000;
+      --white: #FFFFFF;
+      --green: #00FF47; /* Neon green from logo */
+      --focus: 0 0 0 3px var(--green);
+    }
+    html { font-size: 16px; }
+    body {
+      font-family: 'Courier New', Courier, monospace;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.4;
+      margin: 0;
+      padding: 0;
+    }
+    main.container {
+      padding: clamp(1rem, 3vw, 2.5rem) 0;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    /* Hero Banner */
+    .hero {
+      color: var(--black);
+      position: relative;
+      padding: clamp(2.5rem, 8vw, 5rem) 0 clamp(2rem, 5vw, 3rem) 0;
+      text-align: center;
+      overflow: hidden;
+      background: none;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero h1 {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      margin: 0 0 0.5rem 0;
+      letter-spacing: 0.01em;
+      font-weight: 400;
+      color: var(--black);
+    }
+    .hero p {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      margin: 0;
+      font-weight: 400;
+      opacity: 0.85;
+      color: var(--black);
+    }
+    /* Contact Form */
+    .contact-section {
+      margin-top: clamp(2rem, 5vw, 3.5rem);
+      background: var(--white);
+      border-radius: 1.2rem;
+      box-shadow: 0 2px 16px 0 rgba(0,0,0,0.07);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+    .contact-form {
+      display: grid;
+      gap: 1.2rem 2rem;
+      grid-template-columns: 1fr 1fr;
+    }
+    .contact-form label {
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.4em;
+      letter-spacing: 0.01em;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      font-size: 1rem;
+      padding: 0.7em 0.9em;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 0.5em;
+      background: #fafafa;
+      font-family: inherit;
+      transition: border 0.2s;
+      outline: none;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--green);
+      box-shadow: var(--focus);
+    }
+    .contact-form .full-width {
+      grid-column: 1 / -1;
+    }
+    .contact-form textarea {
+      min-height: 120px;
+      max-height: 300px;
+      resize: vertical;
+      font-size: 1rem;
+    }
+    .contact-form input[type="file"] {
+      padding: 0.3em 0;
+      background: none;
+      border: none;
+    }
+    .contact-form .form-actions {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1rem;
+    }
+    .contact-form button {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 0.5em;
+      font-size: 1.1rem;
+      font-family: inherit;
+      font-weight: 700;
+      padding: 0.7em 2.2em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
+    }
+    .contact-form button:focus {
+      outline: 2px solid var(--black);
+      outline-offset: 2px;
+    }
+    .contact-form button:hover,
+    .contact-form button:active {
+      background: var(--white);
+      color: var(--black);
+      border: 2px solid var(--black);
+    }
+    .privacy-note {
+      font-size: 0.98rem;
+      color: #555;
+      margin-top: 0.7em;
+      text-align: left;
+    }
+    .privacy-note a {
+      color: var(--black);
+      text-decoration: underline;
+    }
+    /* Toasts */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 2.5rem;
+      transform: translateX(-50%);
+      min-width: 220px;
+      max-width: 90vw;
+      background: var(--black);
+      color: var(--white);
+      padding: 1em 1.5em;
+      border-radius: 0.7em;
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: 0 2px 16px 0 rgba(0,0,0,0.18);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+      transition: opacity 0.3s, bottom 0.3s;
+    }
+    .toast.show {
+      opacity: 1;
+      pointer-events: auto;
+      bottom: 3.5rem;
+    }
+    /* Customer Service */
+    .customer-service {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7em;
+      font-size: 1.08rem;
+      margin-top: 2.5em;
+      margin-bottom: 2.2em;
+    }
+    .customer-service a {
+      color: var(--black);
+      text-decoration: underline;
+      word-break: break-all;
+    }
+    .customer-service .live-chat {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      font-weight: 600;
+      margin-top: 0.2em;
+    }
+    .customer-service .live-chat svg {
+      width: 1.3em;
+      height: 1.3em;
+      vertical-align: middle;
+      fill: var(--black);
+    }
+    @media (max-width: 640px) {
+      .customer-service .live-chat span { display: none; }
+    }
+    /* Head Office & Showroom */
+    .office-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7em;
+      font-size: 1.08rem;
+    }
+    .office-section .lang-toggle {
+      display: inline-flex;
+      gap: 0.5em;
+      align-items: center;
+      margin-bottom: 0.3em;
+    }
+    .office-section .lang-toggle button {
+      background: none;
+      border: 1.5px solid var(--black);
+      color: var(--black);
+      font-family: inherit;
+      font-size: 1rem;
+      border-radius: 0.4em;
+      padding: 0.2em 0.9em;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .office-section .lang-toggle button.active,
+    .office-section .lang-toggle button:focus {
+      background: var(--black);
+      color: var(--white);
+      outline: 0 0 0 3px var(--black);
+    }
+    .office-section .map-iframe {
+      width: 100%;
+      min-height: 220px;
+      border: none;
+      border-radius: 0.7em;
+      margin-top: 1.5em;
+      margin-bottom: 2em;
+      background: #eee;
+      display: block;
+    }
+    /* Press & Wholesale */
+    .press-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5em;
+      font-size: 1.08rem;
+    }
+    .press-section a {
+      color: var(--black);
+      text-decoration: underline;
+      word-break: break-all;
+    }
+    .press-section .lookbook-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      font-weight: 600;
+      margin-top: 0.2em;
+    }
+    .press-section .lookbook-link svg {
+      width: 1.1em;
+      height: 1.1em;
+      fill: var(--black);
+    }
+    /* Social Links */
+    .social-section {
+      display: flex;
+      gap: 1.2em;
+      margin: 1.2em 0 0.5em 0;
+      align-items: center;
+    }
+    .social-section a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.3em;
+      height: 2.3em;
+      border-radius: 50%;
+      background: var(--black);
+      color: var(--white);
+      transition: background 0.2s, box-shadow 0.2s;
+      outline: none;
+      border: 2px solid transparent;
+    }
+    .social-section a:focus {
+      border-color: var(--black);
+      box-shadow: 0 0 0 3px var(--black);
+    }
+    .social-section a:hover {
+      background: var(--white);
+      color: var(--black);
+      border: 2px solid var(--black);
+    }
+    .social-section svg {
+      width: 1.3em;
+      height: 1.3em;
+      fill: currentColor;
+    }
+    /* FAQ Shortcut */
+    .faq-shortcut {
+      margin: 2.2em 0 0.7em 0;
+      display: flex;
+      justify-content: center;
+    }
+    .faq-card {
+      background: var(--black);
+      color: var(--white);
+      border-radius: 1em;
+      padding: 1.2em 2.2em;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-align: center;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.13);
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+      outline: none;
+      display: inline-block;
+    }
+    .faq-card:focus {
+      outline: 2px solid var(--black);
+      outline-offset: 2px;
+    }
+    .faq-card:hover {
+      background: var(--white);
+      color: var(--black);
+      border: 2px solid var(--black);
+    }
+    /* Responsive */
+    @media (max-width: 800px) {
+      main.container { padding: 1rem 1vw; }
+      .contact-section { padding: 1.2rem 0.5rem; }
+    }
+    @media (max-width: 640px) {
+      .contact-form {
+        grid-template-columns: 1fr;
+        gap: 1.1rem 0;
+      }
+      .faq-card { padding: 1em 1em; font-size: 1rem; }
+      .social-section { gap: 0.7em; }
+    }
+    .customer-service,
+    .office-section,
+    .press-section,
+    .social-section {
+      margin-bottom: 2.2em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="logo.png" alt="FTP Logo" class="logo"></a>
+    <div class="header-spacer"></div>
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <nav id="mainNav">
+      <ul>
+        <li><a href="sale.html">Sale</a></li>
+        <li><a href="lookbook.html">Lookbook</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="stores.html">Stores</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  </header>
+  <main class="container">
+    <!-- Hero Banner -->
+    <section class="hero" aria-label="Contact Hero">
+      <div class="hero-content">
+        <h1>Get in touch.</h1>
+        <p>You might not hear story from us...</p>
+      </div>
+    </section>
+    <!-- Contact Form -->
+    <section class="contact-section" aria-label="Contact Form">
+      <form class="contact-form" id="contactForm" autocomplete="on" novalidate aria-label="Contact form">
+        <div class="full-width">
+          <label for="fullName">Full Name <span aria-hidden="true" style="color:var(--green)">*</span></label>
+          <input type="text" id="fullName" name="fullName" required aria-required="true" maxlength="80" autocomplete="name">
+        </div>
+        <div>
+          <label for="email">Email Address <span aria-hidden="true" style="color:var(--green)">*</span></label>
+          <input type="email" id="email" name="email" required aria-required="true" maxlength="100" autocomplete="email">
+        </div>
+        <div>
+          <label for="orderNumber">Order Number <span style="color:#888;font-weight:400;">(optional)</span></label>
+          <input type="text" id="orderNumber" name="orderNumber" maxlength="32" autocomplete="off">
+        </div>
+        <div class="full-width">
+          <label for="message">Message <span aria-hidden="true" style="color:var(--green)">*</span></label>
+          <textarea id="message" name="message" required aria-required="true" maxlength="500" rows="5" placeholder="How can we help? (max 500 characters)"></textarea>
+        </div>
+        <div class="full-width">
+          <label for="fileUpload">File Upload <span style="color:#888;font-weight:400;">(images/PDF)</span></label>
+          <input type="file" id="fileUpload" name="fileUpload" accept="image/*,application/pdf" aria-label="File upload">
+        </div>
+        <div class="form-actions">
+          <button type="submit" id="submitBtn" aria-label="Send message">Send</button>
+        </div>
+      </form>
+      <div class="privacy-note" id="privacyNote">
+        We collect your data solely to respond to your inquiry. View our full <a href="/privacy" target="_blank" rel="noopener">privacy policy</a>.
+      </div>
+      <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    </section>
+    <!-- Customer Service Details -->
+    <section class="customer-service" aria-label="Customer Service">
+      <div><strong>Email:</strong> <a href="mailto:aharano.biz@gmail.com" aria-label="Customer support email">aharano.biz@gmail.com</a></div>
+      <div><strong>Phone:</strong> <a href="tel:+813XXXXXXX" aria-label="Call customer service">+81-3-XXXX-XXXX</a> <span style="color:#888;">(Mon-Fri 10:00-18:00 JST)</span></div>
+      <div class="live-chat">
+        <a href="#" aria-label="Live chat" tabindex="0">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.48 3 2 6.92 2 11.25c0 2.13 1.13 4.06 3.02 5.47-.13.48-.51 1.8-.6 2.13-.09.33.12.66.45.66.1 0 .2-.03.29-.09.38-.25 1.5-.99 2.12-1.41C8.7 18.02 10.31 18.5 12 18.5c5.52 0 10-3.92 10-8.25S17.52 3 12 3z"/></svg>
+          <span>Live Chat</span>
+        </a>
+      </div>
+    </section>
+    <!-- Head Office & Showroom -->
+    <section class="office-section" aria-label="Head Office & Showroom">
+      <div class="lang-toggle" role="group" aria-label="Language toggle">
+        <button type="button" class="active" id="langEN" aria-pressed="true">EN</button>
+        <button type="button" id="langJP" aria-pressed="false">JP</button>
+      </div>
+      <div id="officeEN">
+        <strong>Head Office & Showroom</strong><br>
+        Southern Nevada, at Groom Lake, within the Nevada Test and Training Range...<br>
+        <span>Opening hours: Mon-Fri 11:00–19:00</span>
+      </div>
+      <div id="officeJP" style="display:none">
+        <strong>本社・ショールーム</strong><br>
+        ネバダ州南部、グルームレイク、ネバダ試験訓練場内...<br>
+        <span>営業時間：月〜金 11:00〜19:00</span>
+      </div>
+      <iframe class="map-iframe" id="gmap" loading="lazy" allowfullscreen title="Google Map" aria-label="Google Map location" src="https://www.google.com/maps?q=37.233333,-115.808333&z=13&output=embed"></iframe>
+    </section>
+    <!-- Press & Wholesale Inquiries -->
+    <section class="press-section" aria-label="Press & Wholesale">
+      <div><strong>Press:</strong> <a href="mailto:aharano.biz@gmail.com" aria-label="Press email">aharano.biz@gmail.com</a></div>
+      <div><strong>Wholesale:</strong> <a href="mailto:aharano.biz@gmail.com" aria-label="Wholesale email">aharano.biz@gmail.com</a></div>
+      <div class="lookbook-link">
+        <a href="/Aliens_Image/AlienCEO.png.webp" download aria-label="Download lookbook PDF">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20h14v-2H5v2zm7-18C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10C22 6.48 17.52 2 12 2zm1 14.59V8h-2v8.59l-3.29-3.3-1.42 1.42L12 19.41l5.71-5.7-1.42-1.42L13 16.59z"/></svg>
+          Download Lookbook (PDF)
+        </a>
+      </div>
+    </section>
+    <!-- Social Links -->
+    <section class="social-section" aria-label="Social Media Links">
+      <a href="https://instagram.com/f_t_p_jpn" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5zm4.25 2.25a6.25 6.25 0 1 1 0 12.5 6.25 6.25 0 0 1 0-12.5zm0 1.5a4.75 4.75 0 1 0 0 9.5 4.75 4.75 0 0 0 0-9.5zm6.25 1.25a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/></svg>
+      </a>
+      <a href="https://youtube.com/@<!-- CUSTOMISE HERE -->" target="_blank" rel="noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+    </section>
+    <!-- FAQ Shortcut -->
+    <div class="faq-shortcut">
+      <a href="faq.html" class="faq-card" aria-label="Go to FAQ">Need something quick? Check our FAQ</a>
+    </div>
+  </main>
+  <footer>
+    <nav>
+      <ul>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="terms.html">terms</a></li>
+      </ul>
+    </nav>
+  </footer>
+  <script>
+    // Language toggle for office section
+    const langEN = document.getElementById('langEN');
+    const langJP = document.getElementById('langJP');
+    const officeEN = document.getElementById('officeEN');
+    const officeJP = document.getElementById('officeJP');
+    langEN.addEventListener('click', () => {
+      langEN.classList.add('active');
+      langJP.classList.remove('active');
+      langEN.setAttribute('aria-pressed', 'true');
+      langJP.setAttribute('aria-pressed', 'false');
+      officeEN.style.display = '';
+      officeJP.style.display = 'none';
+    });
+    langJP.addEventListener('click', () => {
+      langJP.classList.add('active');
+      langEN.classList.remove('active');
+      langJP.setAttribute('aria-pressed', 'true');
+      langEN.setAttribute('aria-pressed', 'false');
+      officeEN.style.display = 'none';
+      officeJP.style.display = '';
+    });
+    // Toast notification
+    function showToast(msg, isError = false) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.style.background = isError ? 'var(--green)' : 'var(--black)';
+      toast.classList.add('show');
+      setTimeout(() => { toast.classList.remove('show'); }, 3500);
+    }
+    // Contact form validation & submission
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const fullName = form.fullName.value.trim();
+      const email = form.email.value.trim();
+      const orderNumber = form.orderNumber.value.trim();
+      const message = form.message.value.trim();
+      const file = form.fileUpload.files[0];
+      // Validation
+      if (!fullName) {
+        showToast('Full Name is required.', true); return;
+      }
+      if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+        showToast('Enter a valid email address.', true); return;
+      }
+      if (!message) {
+        showToast('Message is required.', true); return;
+      }
+      if (message.length > 500) {
+        showToast('Message must be 500 characters or less.', true); return;
+      }
+      if (file && !['image/', 'application/pdf'].some(type => file.type.startsWith(type))) {
+        showToast('File must be an image or PDF.', true); return;
+      }
+      // Prepare form data
+      const formData = new FormData();
+      formData.append('fullName', fullName);
+      formData.append('email', email);
+      formData.append('orderNumber', orderNumber);
+      formData.append('message', message);
+      if (file) formData.append('fileUpload', file);
+      // TODO: Replace endpoint with real backend
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          body: formData
+        });
+        if (res.ok) {
+          showToast('Message sent! We'll get back to you soon.');
+          form.reset();
+        } else {
+          showToast('Something went wrong. Please try again.', true);
+        }
+      } catch (err) {
+        showToast('Network error. Please try again.', true);
+      }
+    });
+
+    // Mobile menu functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mainNav = document.getElementById('mainNav');
+      const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+      function openMobileMenu() {
+        mobileMenuToggle.classList.add('active', 'hide');
+        mainNav.classList.add('active');
+        mobileMenuOverlay.classList.add('active');
+        document.body.classList.add('menu-open');
+      }
+
+      function closeMobileMenu() {
+        mobileMenuToggle.classList.remove('active', 'hide');
+        mainNav.classList.remove('active');
+        mobileMenuOverlay.classList.remove('active');
+        document.body.classList.remove('menu-open');
+      }
+
+      mobileMenuToggle.addEventListener('click', function() {
+        if (mainNav.classList.contains('active')) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+      });
+
+      mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+      // Close menu when clicking on a nav link
+      const navLinks = mainNav.querySelectorAll('a');
+      navLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+      });
+
+      // Close menu on window resize if screen becomes larger
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          closeMobileMenu();
+        }
+      });
+    });
+  </script>
+</body>
+</html> 

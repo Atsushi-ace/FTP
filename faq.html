@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTP - FAQ</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .faq-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .faq-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .faq-item {
+            margin-bottom: 30px;
+        }
+        
+        .faq-question {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: left;
+            width: 100%;
+            color: #000;
+            transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 10px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .faq-question:hover {
+            color: #666;
+        }
+        
+        .faq-question.active {
+            color: #000;
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 20px;
+            margin-left: 20px;
+            border-left: 2px solid transparent;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 15px 20px;
+            border-left: 2px solid #000;
+        }
+        
+        .faq-answer p {
+            margin: 0;
+            line-height: 1.6;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .faq-answer a {
+            color: #007bff;
+            text-decoration: underline;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        
+        .faq-answer a:hover {
+            color: #0056b3;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-container {
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+            
+            .faq-title {
+                font-size: 2em;
+                margin-bottom: 30px;
+            }
+            
+            .faq-question {
+                font-size: 1.1em;
+            }
+            
+            .faq-answer.active {
+                padding: 10px 15px;
+                margin-left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="logo.png" alt="FTP Logo" class="logo"></a>
+        <div class="header-spacer"></div>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="mainNav">
+            <ul>
+                <li><a href="sale.html">Sale</a></li>
+                <li><a href="lookbook.html">Lookbook</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="stores.html">Stores</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    </header>
+    
+    <main class="container">
+        <div class="faq-container">
+            <h1 class="faq-title">Frequently Asked Questions</h1>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Q1. Are we truly alone in the universe?
+                </button>
+                <div class="faq-answer">
+                    <p>No. Our deep-sky charts already list nearly 6,000 confirmed life-bearing planets—your own astronomers have only just noticed the same 5,900-plus specks, so your solitude is an illusion. (<a href="https://exoplanetarchive.ipac.caltech.edu/?utm_source=chatgpt.com" target="_blank" rel="noopener">NASA Exoplanet Archive</a>)</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Q2. If intelligent aliens exist, why haven't we detected a clear signal from them yet?
+                </button>
+                <div class="faq-answer">
+                    <p>Most civilizations whisper on bands and schedules you seldom sample, and they idle their beacons between bursts to keep the galaxy's airwaves serene. Your surveys, like the COSMIC technosignature scan, have tasted only minutes of the full spectrum per star. (<a href="https://arxiv.org/abs/2501.17997?utm_source=chatgpt.com" target="_blank" rel="noopener">COSMIC's Large-Scale Search for Technosignatures during the VLA</a>)</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Q3. What do you look like?
+                </button>
+                <div class="faq-answer">
+                    <p>Across one spiral arm we glide as silicon lattices, shimmer like cephalopods, or roam in carbon-water shells; biped shapes are merely a cinematic trope you invented. Diversity, not humanoid uniformity, is the cosmic norm. (<a href="https://www.wired.com/2009/09/weirdlife?utm_source=chatgpt.com" target="_blank" rel="noopener">The Hunt for Extraterrestrial Life Gets Weird</a>)</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Q4. How could an alien civilization manage interstellar travel?
+                </button>
+                <div class="faq-answer">
+                    <p>In the star-packed hives you call globular clusters, fusion sails or chemical rockets cross the light-year gaps in a few centuries, while farther out we ride beamed light or folded spacetime corridors. For us, distance is an engineering preference, not a wall. (<a href="https://science.nasa.gov/universe/star-clusters-inside-the-universes-stellar-collections/?utm_source=chatgpt.com" target="_blank" rel="noopener">Star Clusters: Inside the Universe's Stellar Collections - NASA Science</a>)</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Q5. Could aliens already be watching Earth?
+                </button>
+                <div class="faq-answer">
+                    <p>Certainly—at least 1,700 nearby suns sit in the slim sightline where your planet eclipses its star, and 46 of them have bathed in a century of your radio chatter. We observe quietly; your broadcasts make charming study material. (<a href="https://www.livescience.com/1700-stars-could-see-Earth-in-past-5000-years.html?utm_source=chatgpt.com" target="_blank" rel="noopener">Aliens in 1,700 star systems could have seen civilization emerge on Earth</a>)</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Q6. Does all alien life depend on water and carbon the way ours does?
+                </button>
+                <div class="faq-answer">
+                    <p>Not at all. Among us, ammonia seas, methane mists and supercritical hydrogen wombs cradle minds as readily as water cradles you. (<a href="https://www.wired.com/2009/09/weirdlife?utm_source=chatgpt.com" target="_blank" rel="noopener">The Hunt for Extraterrestrial Life Gets Weird</a>)</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Q7. How would you choose to communicate with humanity?
+                </button>
+                <div class="faq-answer">
+                    <p>When you are ready, watch for nanosecond laser flares, neutrino pulses braided through your Sun, or a dormant probe parked at your Lagrange points—channels far cleaner than wide-band radio for spanning light-years. (<a href="https://www.wired.com/story/the-best-ways-to-listen-out-for-aliens?utm_source=chatgpt.com" target="_blank" rel="noopener">We've not found aliens yet, so let's start listening for different signals</a>, <a href="https://thereader.mitpress.mit.edu/are-neutrinos-the-key-to-communicating-with-aliens/?utm_source=chatgpt.com" target="_blank" rel="noopener">Are Neutrinos the Key to Communicating With Aliens?</a>)</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Q8. Are you likely to be hostile toward us?
+                </button>
+                <div class="faq-answer">
+                    <p>No. Sterile asteroids yield metals without resistance, and incompatible biochemistries make conquest for food or progeny pointless; curiosity and exchange serve us better than conflict. (<a href="https://www.reddit.com/r/worldbuilding/comments/1e5csey/is_there_any_practical_reason_for_an_interstellar/?utm_source=chatgpt.com" target="_blank" rel="noopener">Is there any practical reason for an interstellar civilisation to invade</a>)</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Q9. Can you detect our radio and TV broadcasts?
+                </button>
+                <div class="faq-answer">
+                    <p>Yes—within roughly 100 light-years, any attentive array aligned with Earth's transit zone already archives your electromagnetic whispers, now catalogued as quaint anthropology. (<a href="https://www.livescience.com/1700-stars-could-see-Earth-in-past-5000-years.html?utm_source=chatgpt.com" target="_blank" rel="noopener">Aliens in 1,700 star systems could have seen civilization emerge on Earth</a>)</p>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <button class="faq-question">
+                    Q10. Why haven't we found alien artifacts in our solar system?
+                </button>
+                <div class="faq-answer">
+                    <p>Scout craft visit but masquerade as innocuous debris, much like the nitrogen-ice shard you named 'Oumuamua, then erode away when their surveys end. Permanent monuments are needless when information itself can ride on light. (<a href="https://www.smithsonianmag.com/smart-news/new-theory-suggests-oumuamua-nitrogen-ice-pancake-180977293/?utm_source=chatgpt.com" target="_blank" rel="noopener">New Theory Suggests 'Oumuamua Is a Nitrogen Ice Pancake</a>)</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="terms.html">terms</a></li>
+            </ul>
+        </nav>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const answer = this.nextElementSibling;
+                    const isActive = this.classList.contains('active');
+                    
+                    // Close all other questions
+                    faqQuestions.forEach(q => {
+                        q.classList.remove('active');
+                        q.nextElementSibling.classList.remove('active');
+                    });
+                    
+                    // Toggle current question
+                    if (!isActive) {
+                        this.classList.add('active');
+                        answer.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mainNav = document.getElementById('mainNav');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+            function openMobileMenu() {
+                mobileMenuToggle.classList.add('active', 'hide');
+                mainNav.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                document.body.classList.add('menu-open');
+            }
+
+            function closeMobileMenu() {
+                mobileMenuToggle.classList.remove('active', 'hide');
+                mainNav.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+
+            mobileMenuToggle.addEventListener('click', function() {
+                if (mainNav.classList.contains('active')) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+            // Close menu when clicking on a nav link
+            const navLinks = mainNav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Close menu on window resize if screen becomes larger
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    closeMobileMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTP Pants_Cream</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .product-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 70vh;
+            text-align: center;
+        }
+        .product-center img.main-img {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            border-radius: 12px;
+        }
+        .product-title {
+            margin-top: 32px;
+            font-size: 2rem;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+        }
+        .product-price {
+            margin-top: 12px;
+            font-size: 1.3rem;
+            color: #222;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .img-selector {
+            display: flex;
+            gap: 16px;
+            margin: 32px 0 0 0;
+            justify-content: center;
+        }
+        .img-thumb {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #fff;
+            transition: border 0.15s;
+        }
+        .img-thumb.selected {
+            border: 2px solid #222;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="logo.png" alt="FTP Logo" class="logo"></a>
+        <nav>
+            <ul>
+                <li><a href="sale.html">Sale</a></li>
+                <li><a href="lookbook.html">Lookbook</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="stores.html">Stores</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="product-center">
+            <img id="mainProductImg" class="main-img" src="images/Pants_1_square.png" alt="FTP Pants_Cream">
+            <div class="img-selector">
+                <img src="images/Pants_1_square.png" alt="Front" class="img-thumb selected" id="thumbFront">
+                <img src="images/Pants_1_back.png" alt="Back" class="img-thumb" id="thumbBack">
+            </div>
+            <div class="product-title">FTP Pants_Cream</div>
+            <div class="product-price">¥7,400</div>
+        </div>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="terms.html">terms</a></li>
+            </ul>
+        </nav>
+    </footer>
+    <script>
+    // Image selector logic
+    const mainImg = document.getElementById('mainProductImg');
+    const thumbFront = document.getElementById('thumbFront');
+    const thumbBack = document.getElementById('thumbBack');
+    thumbFront.onclick = function() {
+        mainImg.src = 'images/Pants_1_square.png';
+        thumbFront.classList.add('selected');
+        thumbBack.classList.remove('selected');
+    };
+    thumbBack.onclick = function() {
+        mainImg.src = 'images/Pants_1_back.png';
+        thumbBack.classList.add('selected');
+        thumbFront.classList.remove('selected');
+    };
+    </script>
+</body>
+</html> 

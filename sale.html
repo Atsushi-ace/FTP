@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTP - Lookbook</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
+            justify-items: center;
+        }
+        .gallery-item { text-align: center; }
+        .gallery-item a img {
+            transition: transform 0.18s cubic-bezier(.4,1.6,.6,1);
+            background: transparent !important;
+            box-shadow: none !important;
+            border-radius: 0;
+            display: block;
+        }
+        .gallery-item a:hover img {
+            transform: scale(1.08) translateY(-8px);
+            box-shadow: none !important;
+            background: transparent !important;
+        }
+        .item-name { margin-top: 10px; font-weight: bold; text-align: center; font-family: 'Courier New', Courier, monospace; font-size: 1.1em; }
+        .item-price { margin-top: 4px; color: #222; font-size: 1em; font-family: 'Courier New', Courier, monospace; }
+        @media (max-width: 900px) {
+            .image-gallery { grid-template-columns: 1fr; max-width: 98vw; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html"><img src="logo.png" alt="FTP Logo" class="logo"></a>
+        <div class="header-spacer"></div>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="mainNav">
+            <ul>
+                <li><a href="sale.html">Sale</a></li>
+                <li><a href="lookbook.html">Lookbook</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="stores.html">Stores</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    </header>
+    <main class="container">
+        <div class="image-gallery">
+            <!-- Row 1 -->
+            <div class="gallery-item">
+                <a href="item-hoodie-cream.html"><img src="images/Hoodie_1_square.png" alt="FTP Hoodie_Cream" style="width:100%; max-width:340px;"></a>
+                <div class="item-name">FTP Hoodie_Cream</div>
+                <div class="item-price">¥8,900</div>
+            </div>
+            <div class="gallery-item">
+                <a href="item-hoodie-olive.html"><img src="images/Hoodie_2_square.png" alt="FTP Hoodie_Olive" style="width:100%; max-width:340px;"></a>
+                <div class="item-name">FTP Hoodie_Olive</div>
+                <div class="item-price">¥9,200</div>
+            </div>
+            <div class="gallery-item">
+                <a href="item-hoodie-tobacco-brown.html"><img src="images/Hoodie_3_square.png" alt="FTP Hoodie_Tobacco Brown" style="width:100%; max-width:340px;"></a>
+                <div class="item-name">FTP Hoodie_Tobacco Brown</div>
+                <div class="item-price">¥8,700</div>
+            </div>
+            <!-- Row 2 -->
+            <div class="gallery-item">
+                <a href="item-pants-cream.html"><img src="images/Pants_1_square.png" alt="FTP Pants_Cream" style="width:100%; max-width:340px;"></a>
+                <div class="item-name">FTP Pants_Cream</div>
+                <div class="item-price">¥7,400</div>
+            </div>
+            <div class="gallery-item">
+                <a href="item-pants-olive.html"><img src="images/Pants_2_square.png" alt="FTP Pants_Olive" style="width:100%; max-width:340px;"></a>
+                <div class="item-name">FTP Pants_Olive</div>
+                <div class="item-price">¥7,900</div>
+            </div>
+            <div class="gallery-item">
+                <a href="item-pants-tobacco-brown.html"><img src="images/Pants_3_square.png" alt="FTP Pants_Tobacco Brown" style="width:100%; max-width:340px;"></a>
+                <div class="item-name">FTP Pants_Tobacco Brown</div>
+                <div class="item-price">¥7,200</div>
+            </div>
+            <!-- Row 3 -->
+            <div class="gallery-item">
+                <a href="item-tshirt-cream.html"><img src="images/Tshirt_1_square.png" alt="FTP T-Shirt_Cream" style="width:100%; max-width:340px;"></a>
+                <div class="item-name">FTP T-Shirt_Cream</div>
+                <div class="item-price">¥4,200</div>
+            </div>
+            <div class="gallery-item">
+                <a href="item-tshirt-olive.html"><img src="images/Tshirt_2_square.png" alt="FTP T-Shirt_Olive" style="width:100%; max-width:340px;"></a>
+                <div class="item-name">FTP T-Shirt_Olive</div>
+                <div class="item-price">¥4,500</div>
+            </div>
+            <div class="gallery-item">
+                <a href="item-tshirt-tobacco-brown.html"><img src="images/Tshirt_3_square.png" alt="FTP T-Shirt_Tobacco Brown" style="width:100%; max-width:340px;"></a>
+                <div class="item-name">FTP T-Shirt_Tobacco Brown</div>
+                <div class="item-price">¥4,100</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <nav>
+            <ul>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="terms.html">terms</a></li>
+            </ul>
+        </nav>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mainNav = document.getElementById('mainNav');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+            function openMobileMenu() {
+                mobileMenuToggle.classList.add('active', 'hide');
+                mainNav.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                document.body.classList.add('menu-open');
+            }
+
+            function closeMobileMenu() {
+                mobileMenuToggle.classList.remove('active', 'hide');
+                mainNav.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+
+            mobileMenuToggle.addEventListener('click', function() {
+                if (mainNav.classList.contains('active')) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+            // Close menu when clicking on a nav link
+            const navLinks = mainNav.querySelectorAll('a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // Close menu on window resize if screen becomes larger
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    closeMobileMenu();
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
